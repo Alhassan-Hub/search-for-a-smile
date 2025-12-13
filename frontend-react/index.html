@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Primary Meta Tags -->
+    <title>Search for a Smile | Sierra Leone</title>
+    <meta name="title" content="Search for a Smile | Sierra Leone">
+    <meta name="description" content="A community of youth bringing hope. We exist to give young people a place to belong in Bo City and beyond. Join our family today.">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://searchforasmile.sl/">
+    <meta property="og:title" content="Search for a Smile - Join Our Family">
+    <meta property="og:description" content="23 Members Strong. Real Impact. Cinematic Journey. Join us in Bo City.">
+    <!-- IMPORTANT: This image will show on WhatsApp. -->
+    <!-- Once deployed, this link will be your real website link. -->
+    <meta property="og:image" content="/images/logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Search for a Smile | Sierra Leone">
+    <meta property="twitter:description" content="A community of youth bringing hope. We exist to give young people a place to belong in Bo City and beyond.">
+    <meta property="twitter:image" content="/images/logo.png">
+
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Tailwind CDN - Remove index.css import temporarily -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'neon-blue': '#00f3ff',
+              'neon-pink': '#ff006e',
+              'neon-purple': '#b967ff',
+              'dark-bg': '#0a0a1a',
+            },
+            boxShadow: {
+              'neon-blue': '0 0 20px rgba(0, 243, 255, 0.5)',
+              'neon-pink': '0 0 20px rgba(255, 0, 110, 0.5)',
+              'neon-purple': '0 0 20px rgba(185, 103, 255, 0.5)',
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

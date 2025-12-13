@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Access | SFAS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="box">
+            <div class="content">
+                
+                <!-- BRANDING -->
+                <div class="brand">
+                    <i class="fa-solid fa-hand-holding-heart logo-icon"></i>
+                    <h2>Search for a Smile</h2>
+                </div>
+
+                <div class="forms-wrapper" id="formsWrapper">
+                    
+                    <!-- 1. LOGIN FORM -->
+                    <form id="loginForm" class="form-slide active">
+                        <div class="inputBox">
+                            <input type="text" id="loginIdentifier" required>
+                            <span>Username or Email</span>
+                            <i></i>
+                        </div>
+                        <div class="inputBox">
+                            <input type="password" id="loginPassword" required>
+                            <span>Password</span>
+                            <i></i>
+                        </div>
+                        <div class="links">
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                        <button type="submit" id="loginBtn">LOG IN</button>
+                        
+                        <div class="switch-text">
+                            <p>Don't have an account? <span id="toSignup">Sign Up</span></p>
+                        </div>
+                    </form>
+
+                    <!-- 2. SIGNUP FORM (No Checkbox) -->
+                    <form id="signupForm" class="form-slide next">
+                        
+                        <!-- 4 Compact Inputs -->
+                        <div class="inputBox compact">
+                            <input type="text" id="signupUsername" required>
+                            <span>Username</span>
+                            <i></i>
+                        </div>
+                        <div class="inputBox compact">
+                            <input type="email" id="signupEmail" required>
+                            <span>Email</span>
+                            <i></i>
+                        </div>
+                        <div class="inputBox compact">
+                            <input type="password" id="signupPassword" required>
+                            <span>Password</span>
+                            <i></i>
+                        </div>
+                        <div class="inputBox compact">
+                            <input type="password" id="confirmPassword" required>
+                            <span>Confirm Password</span>
+                            <i></i>
+                        </div>
+
+                        <!-- Checkbox REMOVED -->
+
+                        <!-- Button will now be visible! -->
+                        <button type="submit" id="signupBtn" style="margin-top: 20px;">REGISTER</button>
+                        
+                        <div class="switch-text">
+                            <p>Already a member? <span id="toLogin">Login</span></p>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
