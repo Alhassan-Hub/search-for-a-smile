@@ -18,8 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'allanbah73@gmail.com', 
-        pass: 'YOUR_16_CHAR_APP_PASSWORD_HERE' // <--- PASTE YOUR APP PASSWORD HERE
+        // Change this to look for variables
+        user: process.env.EMAIL_USER, 
+        pass: process.env.EMAIL_PASS 
     }
 });
 
