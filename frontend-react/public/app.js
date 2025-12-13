@@ -13,7 +13,7 @@ toLoginBtn.addEventListener('click', () => {
 });
 
 // API URL
-const API_URL = 'https://search-for-a-smile.onrender.com//api/auth';
+const API_URL = 'https://search-for-a-smile.onrender.com/api/auth';
 
 // 2. SIGNUP LOGIC
 const signupForm = document.getElementById('signupForm');
