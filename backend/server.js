@@ -9,10 +9,24 @@ const authRoutes = require('./routes/authRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// 1. MIDDLEWARE
-app.use(cors());
+
+// ============================================
+// 1. MIDDLEWARE (THE FIX)
+// ============================================
+
+// Allow ALL origins (Vercel, Localhost, Mobile)
+app.use(cors({
+    origin: '*', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
+}));
+
+// Explicitly handle "Preflight" requests (The browser's security check)
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 // 2. EMAIL CONFIG
 const transporter = nodemailer.createTransport({
