@@ -3,86 +3,59 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-// IMPORT YOUR AUTH ROUTES (This is what I missed last time!)
+// Import Auth Routes
 const authRoutes = require('./routes/authRoutes');
-const { getPool } = require('./config/database');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ============================================
 // 1. MIDDLEWARE
-// ============================================
-app.use(cors()); // Allow frontend to talk to backend
-app.use(express.json()); // Parse JSON data
+app.use(cors());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ============================================
-// 2. EMAIL CONFIGURATION (Nodemailer)
-// ============================================
+// 2. EMAIL CONFIG
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'allanbah73@gmail.com', // Your real email
-        pass: 'utxg modp vetb diql' // ⚠ PASTE YOUR APP PASSWORD HERE
+        user: 'allanbah73@gmail.com', 
+        pass: 'YOUR_16_CHAR_APP_PASSWORD_HERE' // <--- PASTE YOUR APP PASSWORD HERE
     }
 });
 
-// ============================================
 // 3. ROUTES
-// ============================================
-
-// A. HEALTH CHECK
 app.get('/api/health', (req, res) => {
     res.json({ success: true, message: 'Server is running!' });
 });
 
-// B. AUTHENTICATION ROUTES (Login/Signup)
-// This connects to the authRoutes.js file you created earlier
-app.use('/api/auth', authRoutes); 
+app.use('/api/auth', authRoutes);
 
-// C. MEMBER APPLICATION ROUTE (The New Email System)
 app.post('/api/members/apply', async (req, res) => {
     console.log("📩 Received Application:", req.body.fullName);
 
+    // Destructure fields from req.body (avoid redeclaration if variables exist outside)
     const { fullName, email, phone, address, gender, skills, whyJoin } = req.body;
 
     // Email to YOU (Admin)
     const adminMailOptions = {
-        from: '"Search For A Smile System" <allanbah73@gmail.com>',
+        from: '"Search For A Smile" <allanbah73@gmail.com>',
         to: 'allanbah73@gmail.com',
         subject: `🚨 New Application: ${fullName}`,
         html: `
-            <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ddd; border-top: 5px solid #00f3ff;">
-                <h2 style="color: #333;">New Family Member Request!</h2>
-                <h3>👤 Personal Details</h3>
-                <p><strong>Name:</strong> ${fullName}</p>
-                <p><strong>Gender:</strong> ${gender}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Phone:</strong> ${phone}</p>
-                <p><strong>Address:</strong> ${address}</p>
-                <h3>⚡ Superpowers (Skills)</h3>
-                <p style="background: #f0f0f0; padding: 10px; border-radius: 5px;">${skills || "None listed"}</p>
-                <h3>📝 Their Story</h3>
-                <p><em>"${whyJoin}"</em></p>
-            </div>
+            <h3>New Member Request!</h3>
+            <p><strong>Name:</strong> ${fullName}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Skills:</strong> ${skills}</p>
+            <p><strong>Story:</strong> ${whyJoin}</p>
         `
     };
 
-    // Email to the APPLICANT (Welcome)
+    // Email to the APPLICANT
     const userMailOptions = {
         from: '"Search For A Smile" <allanbah73@gmail.com>',
         to: email, 
         subject: 'We received your application! 💙',
-        html: `
-            <div style="font-family: Arial, sans-serif; padding: 20px;">
-                <h2 style="color: #00f3ff;">Hi ${fullName},</h2>
-                <p>Thank you for wanting to join <strong>Search For A Smile</strong>.</p>
-                <p>We have received your details. Our team will review your application and contact you soon.</p>
-                <br/>
-                <p>Best regards,<br/>The Team</p>
-            </div>
-        `
+        html: `<h3>Hi ${fullName},</h3><p>We received your details. Welcome to the family!</p>`
     };
 
     try {
@@ -96,17 +69,7 @@ app.post('/api/members/apply', async (req, res) => {
     }
 });
 
-// ============================================
 // 4. START SERVER
-// ============================================
-app.listen(PORT, async () => {
+app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
-    
-    // Test Database Connection
-    try {
-        await getPool();
-        console.log('✅ Database connection established!');
-    } catch (error) {
-        console.error('❌ Database connection failed:', error.message);
-    }
 });

@@ -16,10 +16,5 @@ router.post('/login', login);
 // PROTECTED ROUTES (Authentication required)
 // ============================================
 
-// Verify token route
-router.get('/verify', verifyToken);
-
-// Logout route
-router.post('/logout', logout);
 
 module.exports = router;
