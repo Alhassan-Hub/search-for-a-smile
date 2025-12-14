@@ -30,11 +30,16 @@ app.use(express.urlencoded({ extended: true }));
 
 // 2. EMAIL CONFIG
 const transporter = nodemailer.createTransport({
-    service: 'gmail', // <--- This worked before! Let's use it.
+    service: 'gmail',
     auth: {
-        user: process.env.EMAIL_USER, 
-        pass: process.env.EMAIL_PASS 
-    }
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    },
+    // 1. Force using standard internet (IPv4) to prevent timeouts
+    family: 4, 
+    // 2. Turn on detailed logging so we can see the handshake in Render logs
+    logger: true,
+    debug: true
 });
 
 // 3. ROUTES
