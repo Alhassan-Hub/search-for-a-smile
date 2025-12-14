@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronRight, ChevronLeft, Check, Heart, Camera, PenTool, Users, Mic, Truck, Utensils } from 'lucide-react';
+import emailjs from '@emailjs/browser'; // Import EmailJS
 
 const BecomeMemberModal = ({ onClose }) => {
   const [step, setStep] = useState(1);
@@ -47,25 +48,28 @@ const BecomeMemberModal = ({ onClose }) => {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    // Convert array to string for email
-    const finalData = { ...formData, skills: formData.skills.join(', ') };
+    
+    // Convert array to string for the template
+    const templateParams = {
+      ...formData,
+      skills: formData.skills.join(', ')
+    };
 
     try {
-      // REPLACE PORT 5000 WITH YOUR ACTUAL BACKEND PORT
-      const response = await fetch('https://search-for-a-smile.onrender.com/api/members/apply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(finalData),
-      });
+      // ⚠ REPLACE THESE WITH YOUR CODES FROM EMAILJS WEBSITE
+      const SERVICE_ID = "service_wj6hoft"; 
+      const TEMPLATE_ID = "template_j6v5un3"; // Your template ID
+      const PUBLIC_KEY = "Ve9Z4uAPnHV1dJ-PO";
 
-      const data = await response.json();
-      if (data.success) {
-        setSubmitSuccess(true);
-        setTimeout(() => onClose(), 4000); // Auto close
-      }
+      // Send email using EmailJS
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+      setSubmitSuccess(true);
+      setTimeout(() => onClose(), 4000);
+      
     } catch (error) {
-      console.error(error);
-      alert('Connection error. Is the server running?');
+      console.error("Email failed:", error);
+      alert("Failed to send application. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
