@@ -30,16 +30,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // 2. EMAIL CONFIG
 const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,              // Change to 587
-    secure: false,          // Must be false for 587 (it upgrades to secure automatically)
+    service: 'gmail', // <--- This worked before! Let's use it.
     auth: {
         user: process.env.EMAIL_USER, 
         pass: process.env.EMAIL_PASS 
-    },
-    // Add these lines to give the connection more time
-    connectionTimeout: 10000, 
-    greetingTimeout: 10000
+    }
 });
 
 // 3. ROUTES
