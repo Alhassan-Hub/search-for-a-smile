@@ -68,12 +68,17 @@ app.post('/api/members/apply', async (req, res) => {
     // Email to the APPLICANT
     const userMailOptions = {
         from: '"Search For A Smile" <allanbah73@gmail.com>',
-        to: email, 
+        to: email,
         subject: 'We received your application! 💙',
         html: `<h3>Hi ${fullName},</h3><p>We received your details. Welcome to the family!</p>`
     };
 
     try {
+        // DEBUG LOGS (This will print to Render Logs)
+        console.log("Attempting to send email...");
+        console.log("User defined?", process.env.EMAIL_USER ? "YES" : "NO");
+        console.log("Pass defined?", process.env.EMAIL_PASS ? "YES" : "NO");
+
         await transporter.sendMail(adminMailOptions);
         await transporter.sendMail(userMailOptions);
         console.log(`✅ Application emails sent for ${fullName}`);
