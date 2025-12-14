@@ -85,7 +85,11 @@ app.post('/api/members/apply', async (req, res) => {
         res.status(200).json({ success: true, message: 'Application received' });
     } catch (error) {
         console.error('❌ Email error:', error);
-        res.status(500).json({ success: false, message: 'Failed to send email' });
+        res.status(500).json({ 
+            success: false, 
+            message: error.message, // <--- This sends the real error text
+            code: error.code        // <--- This sends the error code (like EAUTH)
+        });
     }
 });
 
