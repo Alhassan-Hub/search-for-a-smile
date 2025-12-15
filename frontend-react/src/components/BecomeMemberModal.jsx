@@ -56,7 +56,7 @@ const BecomeMemberModal = ({ onClose }) => {
     try {
       const SERVICE_ID = "service_wj6hoft"; 
       const ADMIN_TEMPLATE_ID = "template_j6v5un3"; 
-      const USER_TEMPLATE_ID = "template_cjOyqgv";
+      const USER_TEMPLATE_ID = "template_cj0yqgv";
       const PUBLIC_KEY = "Ve9Z4uAPnHV1dJ-PO";
 
       await Promise.all([
