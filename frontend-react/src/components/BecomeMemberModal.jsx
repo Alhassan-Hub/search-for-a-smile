@@ -45,34 +45,33 @@ const BecomeMemberModal = ({ onClose }) => {
 
   const nextStep = () => { if (step < totalSteps) setStep(step + 1); };
   const prevStep = () => { if (step > 1) setStep(step - 1); };
-
   const handleSubmit = async () => {
     setIsSubmitting(true);
     
-    // Convert array to string for the template
     const templateParams = {
       ...formData,
       skills: formData.skills.join(', ')
     };
 
     try {
-      // ⚠ REPLACE THESE WITH YOUR CODES FROM EMAILJS WEBSITE
       const SERVICE_ID = "service_wj6hoft"; 
-      const ADMIN_TEMPLATE_ID = "template_j6v5un3"; // The one that emails YOU
-      const USER_TEMPLATE_ID = "template_cjOyqgv"; // 🆕 The new Welcome template
+      const ADMIN_TEMPLATE_ID = "template_j6v5un3"; 
+      const USER_TEMPLATE_ID = "template_cjOyqgv";
       const PUBLIC_KEY = "Ve9Z4uAPnHV1dJ-PO";
 
-      // 1. Send email to YOU (Admin)
-      await emailjs.send(SERVICE_ID, ADMIN_TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      // ⚡ CHANGE: Send BOTH at the same time using Promise.all
+      await Promise.all([
+        emailjs.send(SERVICE_ID, ADMIN_TEMPLATE_ID, templateParams, PUBLIC_KEY),
+        emailjs.send(SERVICE_ID, USER_TEMPLATE_ID, templateParams, PUBLIC_KEY)
+      ]);
 
-      // 2. Send email to THEM (Auto-Reply/Welcome)
-      await emailjs.send(SERVICE_ID, USER_TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      console.log("✅ Both emails sent successfully!"); // Check console for this
 
       setSubmitSuccess(true);
       setTimeout(() => onClose(), 4000);
       
     } catch (error) {
-      console.error("Email failed:", error);
+      console.error("❌ Email failed:", error); // Check console for this
       alert("Failed to send application. Please try again.");
     } finally {
       setIsSubmitting(false);
