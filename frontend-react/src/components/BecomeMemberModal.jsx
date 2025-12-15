@@ -58,11 +58,15 @@ const BecomeMemberModal = ({ onClose }) => {
     try {
       // ⚠ REPLACE THESE WITH YOUR CODES FROM EMAILJS WEBSITE
       const SERVICE_ID = "service_wj6hoft"; 
-      const TEMPLATE_ID = "template_j6v5un3"; // Your template ID
+      const ADMIN_TEMPLATE_ID = "template_j6v5un3"; // The one that emails YOU
+      const USER_TEMPLATE_ID = "template_cjOyqgv"; // 🆕 The new Welcome template
       const PUBLIC_KEY = "Ve9Z4uAPnHV1dJ-PO";
 
-      // Send email using EmailJS
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      // 1. Send email to YOU (Admin)
+      await emailjs.send(SERVICE_ID, ADMIN_TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+      // 2. Send email to THEM (Auto-Reply/Welcome)
+      await emailjs.send(SERVICE_ID, USER_TEMPLATE_ID, templateParams, PUBLIC_KEY);
 
       setSubmitSuccess(true);
       setTimeout(() => onClose(), 4000);
@@ -95,7 +99,7 @@ const BecomeMemberModal = ({ onClose }) => {
             <motion.div 
               className="h-full bg-gradient-to-r from-neon-blue to-neon-purple"
               initial={{ width: '0%' }}
-              animate={{ width: `${(step / totalSteps) * 100}%` }}
+              animate={{ width: ${(step / totalSteps) * 100}% }}
               transition={{ duration: 0.5 }}
             />
           </div>
@@ -152,7 +156,7 @@ const BecomeMemberModal = ({ onClose }) => {
                           <button
                             key={skill.name}
                             onClick={() => handleSkillToggle(skill.name)}
-                            className={`p-3 rounded-xl border flex items-center gap-2 transition-all ${formData.skills.includes(skill.name) ? 'bg-neon-blue/20 border-neon-blue text-white' : 'bg-gray-900 border-gray-700 text-gray-400'}`}
+                            className={p-3 rounded-xl border flex items-center gap-2 transition-all ${formData.skills.includes(skill.name) ? 'bg-neon-blue/20 border-neon-blue text-white' : 'bg-gray-900 border-gray-700 text-gray-400'}}
                           >
                             <skill.icon size={18} />
                             <span className="text-sm font-medium">{skill.name}</span>
