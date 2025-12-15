@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronRight, ChevronLeft, Check, Heart, Camera, PenTool, Users, Mic, Truck, Utensils } from 'lucide-react';
-import emailjs from '@emailjs/browser'; // Import EmailJS
+import emailjs from '@emailjs/browser';
 
 const BecomeMemberModal = ({ onClose }) => {
   const [step, setStep] = useState(1);
@@ -19,7 +19,6 @@ const BecomeMemberModal = ({ onClose }) => {
     whyJoin: ''
   });
 
-  // Fun skills to click on
   const skillOptions = [
     { name: 'Photography/Video', icon: Camera },
     { name: 'Graphic Design', icon: PenTool },
@@ -45,6 +44,7 @@ const BecomeMemberModal = ({ onClose }) => {
 
   const nextStep = () => { if (step < totalSteps) setStep(step + 1); };
   const prevStep = () => { if (step > 1) setStep(step - 1); };
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
     
@@ -59,19 +59,17 @@ const BecomeMemberModal = ({ onClose }) => {
       const USER_TEMPLATE_ID = "template_cjOyqgv";
       const PUBLIC_KEY = "Ve9Z4uAPnHV1dJ-PO";
 
-      // ⚡ CHANGE: Send BOTH at the same time using Promise.all
       await Promise.all([
         emailjs.send(SERVICE_ID, ADMIN_TEMPLATE_ID, templateParams, PUBLIC_KEY),
         emailjs.send(SERVICE_ID, USER_TEMPLATE_ID, templateParams, PUBLIC_KEY)
       ]);
 
-      console.log("✅ Both emails sent successfully!"); // Check console for this
-
+      console.log("✅ Both emails sent successfully!");
       setSubmitSuccess(true);
       setTimeout(() => onClose(), 4000);
       
     } catch (error) {
-      console.error("❌ Email failed:", error); // Check console for this
+      console.error("❌ Email failed:", error);
       alert("Failed to send application. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -92,13 +90,12 @@ const BecomeMemberModal = ({ onClose }) => {
       >
         <button onClick={onClose} className="absolute top-6 right-6 text-gray-400 hover:text-white z-20"><X size={24} /></button>
 
-        {/* PROGRESS BAR */}
         {!submitSuccess && (
           <div className="absolute top-0 left-0 w-full h-1 bg-gray-800">
             <motion.div 
               className="h-full bg-gradient-to-r from-neon-blue to-neon-purple"
               initial={{ width: '0%' }}
-              animate={{ width: ${(step / totalSteps) * 100}% }}
+              animate={{ width: '${(step / totalSteps) * 100}%' }}
               transition={{ duration: 0.5 }}
             />
           </div>
@@ -115,7 +112,6 @@ const BecomeMemberModal = ({ onClose }) => {
             </div>
           ) : (
             <>
-              {/* HEADER */}
               <div className="mb-8">
                 <span className="text-neon-blue text-sm font-bold tracking-wider">STEP {step} OF {totalSteps}</span>
                 <h2 className="text-3xl font-bold text-white mt-2">
@@ -125,7 +121,6 @@ const BecomeMemberModal = ({ onClose }) => {
                 </h2>
               </div>
 
-              {/* STEPS */}
               <div className="flex-1 relative">
                 <AnimatePresence mode="wait">
                   
@@ -155,7 +150,11 @@ const BecomeMemberModal = ({ onClose }) => {
                           <button
                             key={skill.name}
                             onClick={() => handleSkillToggle(skill.name)}
-                            className={p-3 rounded-xl border flex items-center gap-2 transition-all ${formData.skills.includes(skill.name) ? 'bg-neon-blue/20 border-neon-blue text-white' : 'bg-gray-900 border-gray-700 text-gray-400'}}
+                            className={`p-3 rounded-xl border flex items-center gap-2 transition-all ${
+                              formData.skills.includes(skill.name)
+                                ? 'bg-neon-blue/20 border-neon-blue text-white'
+                                : 'bg-gray-900 border-gray-700 text-gray-400'
+                            }`}
                           >
                             <skill.icon size={18} />
                             <span className="text-sm font-medium">{skill.name}</span>
@@ -175,7 +174,6 @@ const BecomeMemberModal = ({ onClose }) => {
                 </AnimatePresence>
               </div>
 
-              {/* BUTTONS */}
               <div className="flex justify-between mt-8 pt-6 border-t border-gray-800">
                 {step > 1 ? (
                   <button onClick={prevStep} className="flex items-center gap-2 text-gray-400 hover:text-white"><ChevronLeft size={20} /> Back</button>
