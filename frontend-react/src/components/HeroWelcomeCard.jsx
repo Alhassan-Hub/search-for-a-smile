@@ -26,7 +26,7 @@ const HeroWelcomeCard = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="relative mx-auto w-full max-w-4xl rounded-3xl overflow-hidden bg-gradient-to-br from-card-bg to-transparent border border-neon-blue/20 p-12 md:p-16 min-h-[400px] flex flex-col items-center justify-between shadow-[0_0_40px_rgba(0,243,255,0.15)]"
+        className="relative mx-auto w-full max-w-4xl rounded-3xl overflow-hidden bg-gradient-to-br from-card-bg to-transparent border border-neon-blue/20 p-12 md:p-16 min-h-[500px] flex flex-col items-center justify-between shadow-[0_0_40px_rgba(0,243,255,0.15)]"
       >
         {/* Background Logo Watermark */}
         <div className="absolute inset-0 flex items-center justify-center opacity-[0.08] overflow-hidden pointer-events-none">
@@ -34,7 +34,7 @@ const HeroWelcomeCard = () => {
         </div>
 
         {/* TOP SECTION: Animated Text */}
-        <div className="relative z-10 text-center w-full mt-4">
+        <div className="relative z-10 text-center w-full">
           <AnimatePresence mode="wait">
             <motion.p
               key={currentTextIndex}
@@ -42,7 +42,6 @@ const HeroWelcomeCard = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.6 }}
-              /* Restored original text sizes here */
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink leading-tight drop-shadow-2xl"
             >
               {motivationalTexts[currentTextIndex]}
@@ -57,22 +56,25 @@ const HeroWelcomeCard = () => {
           </div>
         </div>
 
-        {/* BOTTOM SECTION: Pushed the button down using flex-col and justify-between */}
+        {/* Spacer to push button down */}
+        <div className="flex-grow"></div>
+
+        {/* BOTTOM SECTION: Download Button */}
         <motion.div 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 
             transition={{ delay: 0.8 }} 
-            className="relative z-10 mb-4"
+            className="relative z-10 mt-auto pt-8"
         >
             <a 
               href="/sfas-quran.apk" 
               download
-              className="inline-flex items-center gap-2 px-8 py-3 border-2 border-green-500/50 text-green-400 rounded-full font-black text-sm md:text-base hover:bg-green-500 hover:text-black transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(34,197,94,0.2)]"
+              className="inline-flex items-center gap-2 px-6 py-2.5 border-2 border-green-500/50 text-green-400 rounded-full font-semibold text-sm hover:bg-green-500 hover:text-black transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(34,197,94,0.2)]"
             >
-              <Download size={18} />
+              <Download size={16} />
               DOWNLOAD QURAN APP
             </a>
-            <p className="text-[10px] text-slate-500 text-center mt-3 uppercase tracking-widest font-bold">Android Release v1.0.1</p>
+            <p className="text-[10px] text-slate-500 text-center mt-2 uppercase tracking-widest font-medium">Android Release v1.0.1</p>
         </motion.div>
 
         {/* Decorative Glow Effects */}
