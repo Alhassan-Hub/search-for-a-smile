@@ -25,7 +25,7 @@ const OurStorySection = () => {
           </p>
           
           <p className="text-gray-300 leading-relaxed text-lg">
-            Since 2023, founders Allan and Mahawa Gberie have built a family of 23 committed members. Together, we organize charitable activities, educational initiatives, and community-building events that blend purpose with joy.
+            Since 2023, founders Alhassan Bah and Mahawa Gberie have built a family of 23 committed members. Together, we organize charitable activities, educational initiatives, and community-building events that blend purpose with joy.
           </p>
           
           <div className="mt-8 p-6 bg-neon-blue/10 border border-neon-blue/30 rounded-2xl">

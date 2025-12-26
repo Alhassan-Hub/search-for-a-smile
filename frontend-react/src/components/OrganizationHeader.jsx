@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { LogOut, User } from 'lucide-react';
+import { LogOut, User, Download } from 'lucide-react'; // Added Download icon
 import BecomeMemberModal from './BecomeMemberModal';
 import DonationModal from './DonationModal';
 
@@ -9,7 +9,7 @@ const OrganizationHeader = () => {
   const [user, setUser] = useState(null);
   const [showJoinModal, setShowJoinModal] = useState(false);
   const [showDonateModal, setShowDonateModal] = useState(false);
-  const [showUserMenu, setShowUserMenu] = useState(false); // Dropdown toggle
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -24,15 +24,9 @@ const OrganizationHeader = () => {
     window.location.reload();
   };
 
-  // Helper to get initials (e.g. "Allan Bah" -> "AB")
   const getInitials = (name) => {
     if (!name) return "U";
-    return name
-      .split(' ')
-      .map(word => word[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2);
+    return name.split(' ').map(word => word[0]).join('').toUpperCase().slice(0, 2);
   };
 
   return (
@@ -45,23 +39,20 @@ const OrganizationHeader = () => {
       >
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           
-         {/* 1. LOGO */}
-         <Link to="/">
-            {/* ADDED 'pl-14 md:pl-0' -> Pushes text right on mobile, keeps it normal on laptop */}
-            <div className="cursor-pointer pl-14 md:pl-0"> 
-              <h1 className="hidden md:block text-2xl font-bold ...">
-                Search for a Smile
-              </h1>
-              <h1 className="md:hidden text-xl font-black ...">
-                SFAS
-              </h1>
-            </div>
-          </Link>
+         {/* 1. NEW APP DOWNLOAD BUTTON (Replaced SFAS Text) */}
+         <div className="pl-14 md:pl-0"> 
+            <a 
+              href="/sfas-quran.apk" 
+              download
+              className="flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/40 text-green-400 rounded-xl font-bold text-[10px] md:text-xs hover:bg-green-500 hover:text-black transition-all shadow-[0_0_15px_rgba(34,197,94,0.2)]"
+            >
+              <Download size={14} />
+              SFAS QURAN <span className="hidden sm:inline">(ANDROID)</span>
+            </a>
+          </div>
 
           {/* 2. RIGHT SIDE ACTIONS */}
           <div className="flex items-center gap-3">
-            
-            {/* DONATE (Hidden on tiny screens to save space, Visible on Medium+) */}
             <button 
               onClick={() => setShowDonateModal(true)}
               className="hidden sm:block px-4 py-2 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold text-xs hover:scale-105 transition-transform"
@@ -69,7 +60,6 @@ const OrganizationHeader = () => {
               Donate
             </button>
 
-            {/* JOIN US (Always Visible) */}
             <button 
               onClick={() => setShowJoinModal(true)}
               className="px-4 py-2 rounded-full border border-neon-blue text-neon-blue font-bold text-xs hover:bg-neon-blue hover:text-black transition-all"
@@ -77,12 +67,10 @@ const OrganizationHeader = () => {
               Join
             </button>
 
-            {/* 3. USER AVATAR OR LOGIN */}
             <div className="h-6 w-px bg-gray-700 mx-1"></div>
 
             {user ? (
               <div className="relative">
-                {/* THE AVATAR CIRCLE */}
                 <button 
                   onClick={() => setShowUserMenu(!showUserMenu)}
                   className="w-9 h-9 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border border-gray-600 flex items-center justify-center text-white font-bold text-xs shadow-lg hover:border-neon-blue transition-colors"
@@ -90,7 +78,6 @@ const OrganizationHeader = () => {
                   {getInitials(user.username)}
                 </button>
 
-                {/* USER DROPDOWN MENU */}
                 <AnimatePresence>
                   {showUserMenu && (
                     <motion.div
@@ -114,7 +101,6 @@ const OrganizationHeader = () => {
                 </AnimatePresence>
               </div>
             ) : (
-              // LOGIN LINK (Icon only on mobile)
               <a href="/login.html" className="text-gray-400 hover:text-white transition-colors p-1">
                  <User size={20} />
               </a>
@@ -123,7 +109,6 @@ const OrganizationHeader = () => {
         </div>
       </motion.header>
 
-      {/* MODALS */}
       <AnimatePresence>
         {showJoinModal && <BecomeMemberModal onClose={() => setShowJoinModal(false)} />}
         {showDonateModal && <DonationModal onClose={() => setShowDonateModal(false)} />}
