@@ -26,49 +26,62 @@ const HeroWelcomeCard = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="relative mx-auto w-full max-w-4xl rounded-3xl overflow-hidden bg-gradient-to-br from-card-bg to-transparent border border-neon-blue/20 p-10 md:p-14 min-h-[300px] flex items-center justify-center"
-        style={{ boxShadow: '0 0 30px rgba(0, 243, 255, 0.1)' }}
+        className="relative mx-auto w-full max-w-4xl rounded-3xl overflow-hidden bg-gradient-to-br from-card-bg to-transparent border border-neon-blue/20 p-12 md:p-16 min-h-[400px] flex flex-col items-center justify-between shadow-[0_0_40px_rgba(0,243,255,0.15)]"
       >
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.05] overflow-hidden pointer-events-none">
-          <img src="/images/logo.png" alt="Logo" className="w-[350px] h-[350px] object-contain filter blur-sm" />
+        {/* Background Logo Watermark */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.08] overflow-hidden pointer-events-none">
+          <img src="/images/logo.png" alt="Logo" className="w-[400px] h-[400px] object-contain filter blur-sm" />
         </div>
 
-        <div className="relative z-10 text-center max-w-2xl">
+        {/* TOP SECTION: Animated Text */}
+        <div className="relative z-10 text-center w-full mt-4">
           <AnimatePresence mode="wait">
             <motion.p
               key={currentTextIndex}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
+              exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.6 }}
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink leading-tight"
+              /* Restored original text sizes here */
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink leading-tight drop-shadow-2xl"
             >
               {motivationalTexts[currentTextIndex]}
             </motion.p>
           </AnimatePresence>
 
-          {/* REDESIGNED GHOST BUTTON */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-8">
-            <a 
-              href="/sfas-quran.apk" 
-              download
-              className="inline-flex items-center gap-2 px-6 py-2.5 border border-green-500/50 text-green-400 rounded-full font-bold text-sm hover:bg-green-500 hover:text-black transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(34,197,94,0.1)]"
-            >
-              <Download size={16} />
-              Download Quran App
-            </a>
-          </motion.div>
-
-          <div className="flex justify-center gap-1 mt-6">
+          {/* Progress Dots */}
+          <div className="flex justify-center gap-1.5 mt-8">
             {motivationalTexts.map((_, index) => (
-              <div key={index} className={`h-1 rounded-full transition-all duration-300 ${index === currentTextIndex ? 'w-4 bg-neon-blue' : 'w-1 bg-slate-700'}`} />
+              <div key={index} className={`h-1.5 rounded-full transition-all duration-300 ${index === currentTextIndex ? 'w-6 bg-neon-blue' : 'w-1.5 bg-slate-600'}`} />
             ))}
           </div>
         </div>
+
+        {/* BOTTOM SECTION: Pushed the button down using flex-col and justify-between */}
+        <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            transition={{ delay: 0.8 }} 
+            className="relative z-10 mb-4"
+        >
+            <a 
+              href="/sfas-quran.apk" 
+              download
+              className="inline-flex items-center gap-2 px-8 py-3 border-2 border-green-500/50 text-green-400 rounded-full font-black text-sm md:text-base hover:bg-green-500 hover:text-black transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(34,197,94,0.2)]"
+            >
+              <Download size={18} />
+              DOWNLOAD QURAN APP
+            </a>
+            <p className="text-[10px] text-slate-500 text-center mt-3 uppercase tracking-widest font-bold">Android Release v1.0.1</p>
+        </motion.div>
+
+        {/* Decorative Glow Effects */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-neon-purple/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-neon-blue/5 rounded-full blur-3xl"></div>
       </motion.div>
 
-      {/* OPTION A: ACCORDION GUIDE */}
-      <div className="w-full max-w-xl flex flex-col items-center">
+      {/* ACCORDION GUIDE BELOW CARD */}
+      <div className="w-full max-w-xl flex flex-col items-center mb-10">
         <button 
           onClick={() => setShowGuide(!showGuide)}
           className="flex items-center gap-2 text-slate-500 hover:text-neon-blue transition-colors text-xs font-medium py-2"
@@ -91,14 +104,13 @@ const HeroWelcomeCard = () => {
                       <AlertCircle size={24} />
                   </div>
                   <div>
-                      <h4 className="text-white font-bold text-sm">Android Installation</h4>
+                      <h4 className="text-white font-bold text-sm">How to install the APK</h4>
                       <p className="text-slate-400 text-[11px] leading-relaxed mt-1">
                           1. Click <b>"Download anyway"</b> if browser warns you. <br />
                           2. Open file & click <b>"Install Anyway"</b> on the Play Protect popup.
                       </p>
                   </div>
-                  <div className="md:ml-auto flex gap-2">
-                      <span className="px-2 py-0.5 bg-gray-800 text-gray-500 text-[9px] rounded font-mono">v1.0.1</span>
+                  <div className="md:ml-auto">
                       <span className="px-2 py-0.5 bg-gray-800 text-gray-500 text-[9px] rounded font-mono">46MB</span>
                   </div>
               </div>
