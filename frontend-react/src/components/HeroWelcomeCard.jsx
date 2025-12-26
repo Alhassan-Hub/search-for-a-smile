@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Download, AlertCircle } from 'lucide-react'; // Removed Chevrons to prevent errors
 
 const HeroWelcomeCard = () => {
   const [showGuide, setShowGuide] = useState(false);
@@ -22,6 +22,7 @@ const HeroWelcomeCard = () => {
 
   return (
     <div className="flex flex-col gap-4 items-center w-full px-4">
+      {/* THE MAIN CARD */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -33,7 +34,7 @@ const HeroWelcomeCard = () => {
           <img src="/images/logo.png" alt="Logo" className="w-[400px] h-[400px] object-contain filter blur-sm" />
         </div>
 
-        {/* Animated Text (Original Big Sizes Restored) */}
+        {/* Big Bold Animated Text */}
         <div className="relative z-10 text-center w-full mt-4">
           <AnimatePresence mode="wait">
             <motion.p
@@ -61,44 +62,35 @@ const HeroWelcomeCard = () => {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-neon-blue/5 rounded-full blur-3xl"></div>
       </motion.div>
 
-      {/* OPTION A: ACCORDION GUIDE BELOW CARD (No Big Button) */}
+      {/* THE GUIDE SECTION (CRASH-PROOF VERSION) */}
       <div className="w-full max-w-xl flex flex-col items-center mb-10">
         <button 
           onClick={() => setShowGuide(!showGuide)}
-          className="flex items-center gap-2 text-slate-500 hover:text-green-400 transition-colors text-xs font-medium py-2 px-4 rounded-full border border-white/5 hover:bg-white/5"
+          className="flex items-center gap-2 text-slate-500 hover:text-green-400 transition-colors text-[11px] font-bold py-2 px-4 rounded-full border border-white/5 hover:bg-white/5 tracking-wider"
         >
           <AlertCircle size={14} />
-          First time installing the app? Click for guide
-          {showGuide ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+          {showGuide ? 'CLOSE INSTALLATION GUIDE' : 'FIRST TIME INSTALLING THE APP? CLICK HERE'}
         </button>
 
-        <AnimatePresence>
-          {showGuide && (
-            <motion.div 
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden w-full"
-            >
-              <div className="mt-2 p-5 bg-white/5 border border-white/10 rounded-2xl text-center md:text-left flex flex-col md:flex-row items-center gap-4">
-                  <div className="hidden md:block text-green-400 bg-green-400/10 p-3 rounded-full">
-                      <Download size={24} />
-                  </div>
-                  <div>
-                      <h4 className="text-white font-bold text-sm">Android Installation Steps</h4>
-                      <p className="text-slate-400 text-[11px] leading-relaxed mt-1">
-                          1. Click the <b>"GET QURAN APP"</b> button at the top. <br />
-                          2. If prompted, click <b>"Download anyway"</b>. <br />
-                          3. Open file & click <b>"Install Anyway"</b> on the Play Protect popup.
-                      </p>
-                  </div>
-                  <div className="md:ml-auto">
-                      <span className="px-2 py-0.5 bg-gray-800 text-gray-500 text-[9px] rounded font-mono italic">46MB • APK</span>
-                  </div>
+        {/* Simplified conditional rendering - no special animation to avoid white screens */}
+        {showGuide && (
+          <div className="w-full mt-3 p-6 bg-[#1a1a2e] border border-green-500/20 rounded-2xl text-center md:text-left flex flex-col md:flex-row items-center gap-5 shadow-2xl">
+              <div className="hidden md:block text-green-400 bg-green-400/10 p-3 rounded-full">
+                  <Download size={24} />
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <div>
+                  <h4 className="text-white font-bold text-sm">Android Installation Steps</h4>
+                  <p className="text-slate-400 text-[12px] leading-relaxed mt-2">
+                      1. Click the <b className="text-green-400">Green Button</b> at the top of the page. <br />
+                      2. If your browser warns you, click <b>"Download anyway"</b>. <br />
+                      3. Open the file and click <b>"Install Anyway"</b> on the Google popup.
+                  </p>
+              </div>
+              <div className="md:ml-auto">
+                  <span className="px-3 py-1 bg-black/40 text-gray-500 text-[10px] rounded font-mono border border-white/5">46MB APK</span>
+              </div>
+          </div>
+        )}
       </div>
     </div>
   );
