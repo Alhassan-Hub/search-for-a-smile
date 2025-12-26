@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, AlertCircle } from 'lucide-react'; // Removed Chevrons to prevent errors
+import { Download, AlertCircle } from 'lucide-react';
 
 const HeroWelcomeCard = () => {
   const [showGuide, setShowGuide] = useState(false);
@@ -62,8 +62,10 @@ const HeroWelcomeCard = () => {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-neon-blue/5 rounded-full blur-3xl"></div>
       </motion.div>
 
-      {/* THE GUIDE SECTION (CRASH-PROOF VERSION) */}
+      {/* THE GUIDE SECTION + IPHONE LINK */}
       <div className="w-full max-w-xl flex flex-col items-center mb-10">
+        
+        {/* Help Button */}
         <button 
           onClick={() => setShowGuide(!showGuide)}
           className="flex items-center gap-2 text-slate-500 hover:text-green-400 transition-colors text-[11px] font-bold py-2 px-4 rounded-full border border-white/5 hover:bg-white/5 tracking-wider"
@@ -72,9 +74,22 @@ const HeroWelcomeCard = () => {
           {showGuide ? 'CLOSE INSTALLATION GUIDE' : 'FIRST TIME INSTALLING THE APP? CLICK HERE'}
         </button>
 
-        {/* Simplified conditional rendering - no special animation to avoid white screens */}
+        {/* IPHONE USERS LINK */}
+        <div className="mt-4 text-center">
+            <p className="text-[10px] text-slate-600 uppercase tracking-widest mb-1">Using an iPhone or iPad?</p>
+            <a 
+              href="https://sfas-quran-pwa.vercel.app/"
+              target="_blank" 
+              rel="noreferrer"
+              className="text-xs text-neon-blue hover:text-neon-purple underline underline-offset-4 transition-colors font-bold"
+            >
+              Open the SFAS Quran Web Version →
+            </a>
+        </div>
+
+        {/* The Guide Content */}
         {showGuide && (
-          <div className="w-full mt-3 p-6 bg-[#1a1a2e] border border-green-500/20 rounded-2xl text-center md:text-left flex flex-col md:flex-row items-center gap-5 shadow-2xl">
+          <div className="w-full mt-5 p-6 bg-[#1a1a2e] border border-green-500/20 rounded-2xl text-center md:text-left flex flex-col md:flex-row items-center gap-5 shadow-2xl">
               <div className="hidden md:block text-green-400 bg-green-400/10 p-3 rounded-full">
                   <Download size={24} />
               </div>
@@ -85,9 +100,13 @@ const HeroWelcomeCard = () => {
                       2. If your browser warns you, click <b>"Download anyway"</b>. <br />
                       3. Open the file and click <b>"Install Anyway"</b> on the Google popup.
                   </p>
+                  {/* Small iPhone tip inside the guide */}
+                  <p className="text-slate-500 text-[10px] mt-4 italic border-t border-white/5 pt-2">
+                      *iPhone users: Open the Web Version link above in Safari, tap the 'Share' icon, and select 'Add to Home Screen'.
+                  </p>
               </div>
               <div className="md:ml-auto">
-                  <span className="px-3 py-1 bg-black/40 text-gray-500 text-[10px] rounded font-mono border border-white/5">46MB APK</span>
+                  <span className="px-3 py-1 bg-black/40 text-gray-500 text-[10px] rounded font-mono border border-white/5">v1.0.1</span>
               </div>
           </div>
         )}
