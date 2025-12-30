@@ -4,25 +4,36 @@ import { client, urlFor } from '../lib/sanity';
 import { teamMembers as localMembers } from '../data/organizationData'; 
 
 const MemberSpotlight = () => {
-  // 1. Start with your local members
+  // Start with local members as the default state
   const [members, setMembers] = useState(localMembers);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    // 2. Fetch from Sanity and SMART MERGE
     client.fetch('*[_type == "spotlight"]').then((sanityData) => {
       if (sanityData && sanityData.length > 0) {
         
-        // A. Get a list of names that are already in Sanity (lowercase for safe comparison)
-        const sanityNames = sanityData.map(m => (m.memberName || m.name || "").toLowerCase());
+        // 1. Create a "Map" of Sanity data for quick lookups by name
+        const sanityMap = {};
+        sanityData.forEach(item => {
+          const nameKey = (item.memberName || item.name || "").toLowerCase().trim();
+          sanityMap[nameKey] = item;
+        });
 
-        // B. Filter localMembers: Keep them ONLY if their name is NOT already in Sanity
-        const filteredLocal = localMembers.filter(local => 
-          !sanityNames.includes((local.name || "").toLowerCase())
-        );
+        // 2. Map through localMembers and SWAP only if a match exists in Sanity
+        const orderedMembers = localMembers.map((local) => {
+          const localNameKey = (local.name || "").toLowerCase().trim();
+          
+          if (sanityMap[localNameKey]) {
+            // Found a match! Use the Sanity version to replace the local one
+            return sanityMap[localNameKey];
+          }
+          
+          // No match in Sanity? Keep the local member in this position
+          return local;
+        });
 
-        // C. Merge them: Sanity versions come first, followed by the remaining unique local members
-        setMembers([...sanityData, ...filteredLocal]);
+        // 3. Update the state with the perfectly ordered list
+        setMembers(orderedMembers);
       }
     });
   }, []);
@@ -57,6 +68,7 @@ const MemberSpotlight = () => {
             <div className="w-full md:w-1/3">
               <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-neon-blue/30 shadow-neon-blue group">
                 <img 
+                  // Checks for Sanity image first, falls back to local image
                   src={currentMember.memberImage ? urlFor(currentMember.memberImage).width(600).url() : currentMember.image} 
                   alt={currentMember.memberName || currentMember.name} 
                   className="w-full h-full object-cover transition-transform duration-700 scale-105"
