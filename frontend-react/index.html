@@ -4,36 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Primary Meta Tags -->
-    <!-- This is your "Blue Line" in Google Search -->
+    <link rel="canonical" href="https://search-for-a-smile.vercel.app/" />
+
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+
     <title>Search for a Smile | Youth Charity Organization in Bo City, Sierra Leone</title>
     <meta name="title" content="Search for a Smile | Youth Charity Organization in Bo City, Sierra Leone">
     <meta name="description" content="A community of youth bringing hope. We exist to give young people a place to belong in Bo City and beyond. Join our family today and help us make a real impact in Sierra Leone.">
     <meta name="keywords" content="Charity Sierra Leone, Search for a Smile Bo City, Youth Organization Bo, Humanitarian Aid Sierra Leone, Hope for Youth">
     <meta name="author" content="Search for a Smile">
 
-    <!-- Google Site Verification (Keeping your existing code) -->
     <meta name="google-site-verification" content="uJqyy3dEAeN5EGOW9KvI1ytzqgdOMw8TZQAjv4K3x0k" />
 
-    <!-- Open Graph / Facebook / WhatsApp (Crucial for showing the blue link and preview) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": "Search for a Smile",
+      "alternateName": "SFAS Sierra Leone",
+      "url": "https://search-for-a-smile.vercel.app/",
+      "logo": "https://search-for-a-smile.vercel.app/images/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bo City",
+        "addressRegion": "Southern Province",
+        "addressCountry": "SL"
+      },
+      "description": "A community-based youth organization in Bo City providing belonging and hope to young people.",
+      "sameAs": [
+        "https://wa.me/23276252233"
+      ]
+    }
+    </script>
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://search-for-a-smile.vercel.app/">
     <meta property="og:title" content="Search for a Smile | Empowering Youth in Sierra Leone">
     <meta property="og:description" content="23 Members Strong. Real Impact. Join our youth family in Bo City today.">
-    <!-- Fixed: Using absolute path so Google/WhatsApp can definitely see the logo -->
     <meta property="og:image" content="https://search-for-a-smile.vercel.app/images/logo.png">
 
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://search-for-a-smile.vercel.app/">
     <meta property="twitter:title" content="Search for a Smile | Sierra Leone">
     <meta property="twitter:description" content="A community of youth bringing hope in Bo City and beyond. Join us in making a difference.">
     <meta property="twitter:image" content="https://search-for-a-smile.vercel.app/images/logo.png">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     
-    <!-- Tailwind CDN with your Custom Config -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -57,7 +74,6 @@
   </head>
   <body class="bg-dark-bg text-white">
     <div id="root"></div>
-    <!-- Main Entry Point -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
