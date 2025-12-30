@@ -80,7 +80,7 @@ const FoundersSection = () => {
         <p className="text-gray-400 text-lg leading-relaxed">
           In 2023, Alhassan and Mahawa saw too many young people feeling lost and alone in Sierra Leone. 
           They decided to create something different - not just another organization, but a real home. 
-          Today, Search for a Smile is a family of 23 members and growing, proving that genuine connection 
+          Today, Search for a Smile is a family of 25 members and growing, proving that genuine connection 
           and purpose can change lives.
         </p>
       </motion.div>
