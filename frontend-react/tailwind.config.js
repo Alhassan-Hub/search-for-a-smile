@@ -2,23 +2,21 @@
 export default {
   content: [
     "./index.html",
-    "./src//*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}", // Fixed a typo here
   ],
   theme: {
     extend: {
       colors: {
-        'neon-blue': '#00f3ff',
-        'neon-pink': '#ff006e',
-        'neon-purple': '#b967ff',
-        'dark-bg': '#0a0a1a',
-      },
-      backgroundColor: {
-        'card-bg': 'rgba(255, 255, 255, 0.05)',
+        // Professional Charity Palette
+        'brand-gold': '#D4AF37',       // Elegant, muted gold/yellow
+        'brand-gold-light': '#FEF3C7', // Very soft yellow for backgrounds
+        'brand-dark': '#1F2937',       // Charcoal (Soft black for high readability)
+        'brand-gray': '#6B7280',       // Gray for secondary text
+        'brand-light': '#FAFAFA',      // Off-white for clean backgrounds
       },
       boxShadow: {
-        'neon-blue': '0 0 20px rgba(0, 243, 255, 0.5)',
-        'neon-pink': '0 0 20px rgba(255, 0, 110, 0.5)',
-        'neon-purple': '0 0 20px rgba(185, 103, 255, 0.5)',
+        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)', // Modern, subtle shadow
+        'elegant': '0 10px 30px -5px rgba(0, 0, 0, 0.08)',
       }
     },
   },
