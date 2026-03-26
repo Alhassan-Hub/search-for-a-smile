@@ -3,94 +3,56 @@ import { motion } from 'framer-motion';
 
 const OurJourney = () => {
   const milestones = [
-    {
-      date: 'March 24, 2024',
-      title: 'First Charity Event',
-      description: 'Ramadan provisions distribution at village',
-      icon: '🎁',
-      color: 'neon-blue'
-    },
-    {
-      date: 'June 17, 2024',
-      title: 'First Get-Together',
-      description: 'Building our family through connection',
-      icon: '🤝',
-      color: 'neon-pink'
-    },
-    {
-      date: 'July 28, 2024',
-      title: 'Orphanage Donation',
-      description: 'Supporting children in need',
-      icon: '❤',
-      color: 'neon-purple'
-    },
-    {
-      date: 'February 2025',
-      title: 'Masjid Support',
-      description: 'Donated kettles and buckets to 3 masjids',
-      icon: '🕌',
-      color: 'neon-blue'
-    },
-    {
-      date: 'March 31, 2025',
-      title: 'First Hiking Adventure',
-      description: 'Team bonding through nature',
-      icon: '🥾',
-      color: 'neon-pink'
-    },
-    {
-      date: 'December 28, 2025',
-      title: 'Year-End Celebration',
-      description: 'Get-together to celebrate our growth',
-      icon: '🎉',
-      color: 'neon-purple'
-    },
+    { date: 'Mar 2024', title: 'First Charity Event', description: 'Ramadan provisions distribution for vulnerable families.' },
+    { date: 'Jun 2024', title: 'Community Formed', description: 'Our first official gathering, building a foundation of genuine connection.' },
+    { date: 'Jul 2024', title: 'Orphanage Support', description: 'Delivering essential supplies and love to children in need.' },
+    { date: 'Feb 2025', title: 'Masjid Support', description: 'Providing vital resources (kettles and buckets) to 3 local masjids.' },
+    { date: 'Mar 2025', title: 'Nature & Bonding', description: 'Our first hiking adventure to strengthen our team spirit.' },
+    { date: 'Dec 2025', title: 'Year-End Celebration', description: 'Celebrating our growth and planning the future of our impact.' },
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-    >
-      <h2 className="text-5xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-pink">
-        Our Journey
-      </h2>
-      <p className="text-center text-gray-400 text-lg mb-12">Every step of our story</p>
+    <section className="py-24 bg-[#FFFFFF] border-b border-[#E0F2FE]">
+      <div className="container mx-auto px-6 max-w-4xl">
+        
+        <div className="text-center mb-24">
+          <span className="text-[#0284C7] font-sans text-sm tracking-[0.2em] uppercase font-bold">History</span>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#0A192F] mt-4">Our Journey</h2>
+        </div>
 
-      <div className="max-w-4xl mx-auto">
-        {milestones.map((milestone, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            className="relative pl-16 pb-12 last:pb-0"
-          >
-            {/* Timeline Line */}
-            {index !== milestones.length - 1 && (
-              <div className={`absolute left-6 top-14 w-0.5 h-full bg-gradient-to-b from-${milestone.color}/50 to-transparent`}></div>
-            )}
-
-            {/* Icon Circle */}
-            <div className={`absolute left-0 top-0 w-12 h-12 rounded-full bg-${milestone.color}/20 border-2 border-${milestone.color} flex items-center justify-center text-2xl shadow-${milestone.color}`}>
-              {milestone.icon}
-            </div>
-
-            {/* Content */}
-            <div className="bg-gradient-to-br from-card-bg to-transparent border border-gray-700 rounded-xl p-6 hover:border-neon-purple/30 transition-all hover:-translate-y-1">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-xl font-bold">{milestone.title}</h3>
-                <span className="text-xs text-gray-500 whitespace-nowrap ml-4">{milestone.date}</span>
+        <div className="flex flex-col gap-12 md:gap-16">
+          {milestones.map((milestone, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="group relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12"
+            >
+              {/* INNOVATION: The Date acts as the visual art instead of a childish icon */}
+              <div className="w-full md:w-1/3 flex md:justify-end">
+                <div className="text-[#0A192F] font-serif text-3xl md:text-4xl font-bold border-l-4 border-[#0284C7] pl-6 md:border-l-0 md:border-r-4 md:pl-0 md:pr-6 transition-all duration-300 group-hover:text-[#0284C7]">
+                  {milestone.date}
+                </div>
               </div>
-              <p className="text-gray-400">{milestone.description}</p>
-            </div>
-          </motion.div>
-        ))}
+
+              {/* Connecting Dot (Only visible on desktop for a clean look) */}
+              <div className="hidden md:flex absolute left-[33.33%] transform -translate-x-1/2 w-4 h-4 rounded-full bg-[#0284C7] ring-4 ring-[#E0F2FE] z-10"></div>
+
+              {/* The Content Card */}
+              <div className="w-full md:w-2/3">
+                <div className="bg-[#F0F9FF] p-8 rounded-2xl border border-[#E0F2FE] shadow-sm hover:shadow-md transition-all duration-300">
+                  <h3 className="text-2xl font-serif font-bold text-[#0A192F] mb-2">{milestone.title}</h3>
+                  <p className="text-[#64748B] font-sans text-base leading-relaxed">{milestone.description}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
       </div>
-    </motion.div>
+    </section>
   );
 };
 

@@ -1,97 +1,78 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import BecomeMemberModal from './BecomeMemberModal';
+import DonationModal from './DonationModal';
+import { Heart, UserPlus } from 'lucide-react';
 
 const CallToAction = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showJoinModal, setShowJoinModal] = useState(false);
+  const [showDonateModal, setShowDonateModal] = useState(false);
 
   return (
     <>
-      <section className="py-12">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative bg-gradient-to-br from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 border border-neon-blue/30 rounded-3xl p-16 text-center overflow-hidden"
-        >
-          {/* Background Effects */}
-          <div className="absolute top-0 left-0 w-full h-full">
-            <div className="absolute top-10 left-10 w-40 h-40 bg-neon-blue/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-10 right-10 w-40 h-40 bg-neon-pink/20 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-neon-purple/10 rounded-full blur-3xl"></div>
-          </div>
+      <section className="py-24 bg-[#F0F4F7] px-6">
+        <div className="container mx-auto max-w-5xl">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative bg-[#FFFFFF] border border-[#E2E8F0] rounded-[3rem] p-12 md:p-20 text-center shadow-[0_20px_60px_-15px_rgba(10,25,47,0.05)] overflow-hidden"
+          >
+            {/* Elegant Background Accent */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#F0F4F7] rounded-full blur-[80px] -z-0"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#2563EB]/5 rounded-full blur-[80px] -z-0"></div>
 
-          {/* Content */}
-          <div className="relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <h2 className="text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink">
-                Ready to Find Your Home?
+            <div className="relative z-10">
+              
+              <span className="text-[#2563EB] font-sans text-xs md:text-sm tracking-[0.2em] uppercase font-bold mb-4 block">
+                Take Action
+              </span>
+
+              <h2 className="text-4xl md:text-6xl font-serif font-bold mb-8 text-[#0A192F] leading-tight">
+                Ready to change <br className="hidden md:block" /> a life today?
               </h2>
-              <p className="text-xl text-gray-300 mb-6 max-w-3xl mx-auto">
-                We're just getting started, and we need YOU.
+              
+              <p className="text-lg md:text-xl text-[#64748B] mb-12 max-w-2xl mx-auto font-sans leading-relaxed">
+                We are building a foundation of hope for vulnerable mothers and young girls across Sierra Leone. Whether you give your time or your resources, you are essential to this mission.
               </p>
-              <p className="text-lg text-gray-400 mb-10 max-w-3xl mx-auto">
-                Search for a Smile is 2 years young. We've built a strong foundation with 23 amazing members and completed multiple impactful events. But the best is yet to come.
+
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                
+                {/* Primary Button: Donate */}
+                <button
+                  onClick={() => setShowDonateModal(true)}
+                  className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-5 bg-[#0A192F] text-[#FFFFFF] rounded-full font-sans font-bold text-base hover:bg-[#2563EB] hover:-translate-y-1 transition-all duration-300 shadow-xl"
+                >
+                  <Heart size={20} />
+                  Make a Donation
+                </button>
+
+                {/* Secondary Button: Join */}
+                <button
+                  onClick={() => setShowJoinModal(true)}
+                  className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-5 bg-[#FFFFFF] border-2 border-[#E2E8F0] text-[#0A192F] rounded-full font-sans font-bold text-base hover:border-[#0A192F] transition-all duration-300"
+                >
+                  <UserPlus size={20} />
+                  Join Our Team
+                </button>
+              </div>
+
+              <p className="mt-12 text-sm text-[#64748B] font-sans font-medium tracking-wide">
+                Together, we are rewriting stories.
               </p>
-              <p className="text-lg text-gray-300 mb-10 max-w-3xl mx-auto font-semibold">
-                Will you join us in writing this story?
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-            >
-              <button
-                onClick={() => setShowModal(true)}
-                className="group relative px-10 py-5 bg-gradient-to-r from-neon-blue to-neon-purple rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-neon-blue"
-              >
-                <span className="relative z-10">Become a Member</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-neon-purple to-neon-pink rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </button>
-
-              <button
-                onClick={() => scrollToSection('story')}
-                className="px-10 py-5 border-2 border-neon-pink rounded-full font-bold text-lg hover:bg-neon-pink/10 hover:scale-105 transition-all"
-              >
-                Read Our Story
-              </button>
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-              className="mt-8 text-sm text-gray-500"
-            >
-              💙 Together, we're not just changing lives — we're rewriting stories
-            </motion.p>
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
+      {/* Render Modals */}
       <AnimatePresence>
-        {showModal && <BecomeMemberModal onClose={() => setShowModal(false)} />}
+        {showJoinModal && <BecomeMemberModal onClose={() => setShowJoinModal(false)} />}
+        {showDonateModal && <DonationModal onClose={() => setShowDonateModal(false)} />}
       </AnimatePresence>
     </>
   );
-};
-
-const scrollToSection = (id) => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
 };
 
 export default CallToAction;

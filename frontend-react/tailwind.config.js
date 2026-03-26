@@ -2,21 +2,19 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}", // Fixed a typo here
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       colors: {
-        // Professional Charity Palette
-        'brand-gold': '#D4AF37',       // Elegant, muted gold/yellow
-        'brand-gold-light': '#FEF3C7', // Very soft yellow for backgrounds
-        'brand-dark': '#1F2937',       // Charcoal (Soft black for high readability)
-        'brand-gray': '#6B7280',       // Gray for secondary text
-        'brand-light': '#FAFAFA',      // Off-white for clean backgrounds
+        'powder-blue': '#F0F4F7', // Very light, desaturated blue for backgrounds
+        'navy': '#0A192F',        // Deep, sophisticated navy for text and buttons
+        'slate': '#64748B',       // Soft slate for secondary text
+        'crisp-white': '#FFFFFF', // Pure white for cards
       },
-      boxShadow: {
-        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)', // Modern, subtle shadow
-        'elegant': '0 10px 30px -5px rgba(0, 0, 0, 0.08)',
+      fontFamily: {
+        serif: ['"Playfair Display"', 'serif'], // Luxury headings
+        sans: ['Inter', 'sans-serif'],          // Clean body text
       }
     },
   },

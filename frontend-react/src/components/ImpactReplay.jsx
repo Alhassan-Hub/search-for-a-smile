@@ -3,56 +3,68 @@ import { motion } from 'framer-motion';
 import { impactVideos } from '../data/organizationData';
 
 const ImpactReplay = () => {
+  // Gracefully handle if there is no video data yet
+  if (!impactVideos || impactVideos.length === 0) return null;
+  
   const mainVideo = impactVideos[0];
 
-  if (!mainVideo) return null;
-
   return (
-    <section className="py-20 bg-black relative overflow-hidden">
-      
-      {/* Background Decor */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-32 bg-neon-purple/20 blur-[100px] rounded-full pointer-events-none"></div>
-
-      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
+    <section className="py-24 bg-[#0A192F] relative overflow-hidden">
+      <div className="container mx-auto px-6 max-w-5xl relative z-10 flex flex-col items-center">
         
-        {/* Header */}
-        <div className="text-center mb-10">
-          <h2 className="text-4xl font-bold text-white mb-2">
-            Impact <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-pink">Replay</span>
-          </h2>
-          <p className="text-gray-400">Watch our journey unfold.</p>
-        </div>
-
-        {/* 
-            NATIVE VIDEO PLAYER
-            - No external libraries.
-            - Uses the standard browser player.
-        */}
+        {/* Section Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative w-full max-w-2xl aspect-video bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl mx-auto"
+          className="text-center mb-12 md:mb-16"
+        >
+          <span className="text-[#2563EB] font-sans text-xs md:text-sm tracking-[0.2em] uppercase font-bold">
+            Watch Our Journey
+          </span>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#FFFFFF] mt-4 mb-4">
+            Impact Replay
+          </h2>
+          <div className="w-16 h-1 bg-[#F0F4F7]/20 mx-auto rounded-full"></div>
+        </motion.div>
+
+        {/* 
+            CINEMATIC VIDEO PLAYER
+            Wrapped in a sleek, borderless, rounded container with a soft glow
+        */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative w-full max-w-4xl aspect-video bg-[#050B14] rounded-3xl md:rounded-[2rem] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] border border-[#FFFFFF]/10"
         >
           <video 
             className="w-full h-full object-cover"
             controls 
             playsInline
-            poster={mainVideo.thumbnail} // This puts your photo back as the cover!
+            poster={mainVideo.thumbnail}
           >
-            {/* This connects to your data file */}
             <source src={mainVideo.videoUrl} type="video/mp4" />
-            
-            {/* Fallback message */}
             Your browser does not support the video tag.
           </video>
         </motion.div>
 
-        {/* Video Title */}
-        <div className="mt-8 text-center max-w-xl mx-auto">
-          <h3 className="text-xl font-bold text-white mb-2">{mainVideo.title}</h3>
-          <p className="text-gray-400 text-sm leading-relaxed">{mainVideo.description}</p>
-        </div>
+        {/* Video Title & Description */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-10 text-center max-w-2xl mx-auto"
+        >
+          <h3 className="text-2xl font-serif font-bold text-[#FFFFFF] mb-3">
+            {mainVideo.title}
+          </h3>
+          <p className="text-[#64748B] font-sans text-base md:text-lg leading-relaxed">
+            {mainVideo.description}
+          </p>
+        </motion.div>
 
       </div>
     </section>
